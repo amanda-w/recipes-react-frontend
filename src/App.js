@@ -16,6 +16,9 @@ import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import Welcome from './components/Welcome';
 
+// Pages
+import Home from './pages/Home';
+
 const PrivateRoute = ({ component: Component, ...rest}) => {
   let token = localStorage.getItem('jwtToken');
   console.log('===> Hitting a Private Route');
@@ -71,6 +74,7 @@ function App() {
           />
           <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
           <Route exact path="/" component={Welcome} />
+          <Route path="/home" component={Home} />
           <Route path="/about" component={About} />
         </Switch>
       </div>
