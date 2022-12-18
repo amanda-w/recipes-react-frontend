@@ -17,8 +17,8 @@ import Profile from './components/Profile';
 import Welcome from './components/Welcome';
 
 // Pages
-//import Home from './pages/Home';
-import Pages from './pages/Pages';
+import Home from './pages/Home';
+// import Pages from './pages/Pages';
 import Category from './components/Category';
 
 const PrivateRoute = ({ component: Component, ...rest}) => {
@@ -75,11 +75,12 @@ function App() {
             render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser}/>}
           />
           <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
-          <Route exact path="/" component={Welcome} />
-          <Route path="/pages" render={props => 
+          <Route exact path="/welcome" component={Welcome} />
+          <Route path="/recipes" render={props => 
             <Fragment>
               <Category />
-              <Pages />
+              <Home />
+              
             </Fragment>
           } />
           <Route path="/about" component={About} />

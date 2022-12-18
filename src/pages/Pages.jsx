@@ -1,12 +1,11 @@
- import React from 'react';
- import Home from './Home';
- 
- function Pages() {
-   return (
-     <div>
-        <Home />
-     </div>
-   );
- }
- 
- export default Pages;
+// import React from 'react';
+// import Home from './Home';
+// import Cuisine from './Cuisine';
+// import { Route, Router, Switch } from 'react-router-dom';
+
+// function Pages() {
+//     return (
+//     );
+// }
+
+// export default Pages;
