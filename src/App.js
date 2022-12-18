@@ -1,5 +1,5 @@
 // Imports
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
@@ -19,6 +19,7 @@ import Welcome from './components/Welcome';
 // Pages
 //import Home from './pages/Home';
 import Pages from './pages/Pages';
+import Category from './components/Category';
 
 const PrivateRoute = ({ component: Component, ...rest}) => {
   let token = localStorage.getItem('jwtToken');
@@ -75,7 +76,12 @@ function App() {
           />
           <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
           <Route exact path="/" component={Welcome} />
-          <Route path="/pages" component={Pages} />
+          <Route path="/pages" render={props => 
+            <Fragment>
+              <Category />
+              <Pages />
+            </Fragment>
+          } />
           <Route path="/about" component={About} />
         </Switch>
       </div>
