@@ -20,6 +20,7 @@ import Welcome from './components/Welcome';
 import Home from './pages/Home';
 // import Pages from './pages/Pages';
 import Category from './components/Category';
+import Cuisine from './pages/Cuisine';
 
 const PrivateRoute = ({ component: Component, ...rest}) => {
   let token = localStorage.getItem('jwtToken');
@@ -76,11 +77,19 @@ function App() {
           />
           <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
           <Route exact path="/welcome" component={Welcome} />
+          {/* <Route path="/cuisine/:type" component={Cuisine} /> */}
           <Route path="/recipes" render={props => 
             <Fragment>
               <Category />
               <Home />
-              
+
+            </Fragment>
+          } />
+             <Route path="/cuisine/:type" render={props => 
+            <Fragment>
+              <Category />
+              <Cuisine />
+
             </Fragment>
           } />
           <Route path="/about" component={About} />
