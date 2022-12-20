@@ -22,6 +22,7 @@ import Home from './pages/Home';
 import Category from './components/Category';
 import Cuisine from './pages/Cuisine';
 import Search from './components/Search';
+import Searched from './pages/Searched';
 
 const PrivateRoute = ({ component: Component, ...rest}) => {
   let token = localStorage.getItem('jwtToken');
@@ -86,11 +87,19 @@ function App() {
 
             </Fragment>
           } />
-             <Route path="/cuisine/:type" render={props => 
+          <Route path="/cuisine/:type" render={props => 
             <Fragment>
               <Search />
               <Category />
               <Cuisine />
+
+            </Fragment>
+          } />
+          <Route path="/searched/:search" render={props => 
+            <Fragment>
+              <Search />
+              <Category />
+              <Searched />
 
             </Fragment>
           } />

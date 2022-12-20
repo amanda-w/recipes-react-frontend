@@ -2,12 +2,15 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 
 function Search() {
     const [input, setInput] = useState('');
+    const history = useHistory();
 
     const submitHandler = (e) => {
         e.preventDefault();
+        history.push(`/searched/${input}`);
     };
 
     return (
