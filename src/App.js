@@ -83,6 +83,7 @@ function App() {
           {/* <Route path="/cuisine/:type" component={Cuisine} /> */}
           <Route path="/recipes" render={props => 
             <Fragment>
+              <Search />
               <Category />
               <Home />
 
