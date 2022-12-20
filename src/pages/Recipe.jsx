@@ -1,7 +1,8 @@
-import { useEffect, useState, UseState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import React from 'react';
+//import { optimizedAppearDataAttribute } from "framer-motion";
 
 function Recipe() {
 
@@ -9,13 +10,22 @@ function Recipe() {
     const [details, setDetails] = useState({});
     const [activeTab, setActiveTab] = useState('instructions');
 
-    const fetchDetails = async () => {
-        const data = await fetch(`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`);
-        const detailData = await data.json();
-        setDetails(detailData);
-    };
+    // const fetchDetails = async () => {
+    //     const data = await fetch(`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`);
+    //     const detailData = await data.json();
+    //     setDetails(detailData);
+    //     console.log(detailData);
+    // };
 
     useEffect(() => {
+
+        const fetchDetails = async () => {
+            const data = await fetch(`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`);
+            const detailData = await data.json();
+            setDetails(detailData);
+            console.log(detailData);
+        };
+
         fetchDetails();
     }, [params.name]);
 
@@ -28,6 +38,19 @@ function Recipe() {
             <Info>
                 <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab('instructions')}>Instructions</Button>
                 <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab('ingredients')}>Ingredients</Button>
+                {activeTab === 'instructions' && (
+                    <div>
+                        <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
+                        <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
+                    </div>
+                )}
+                {activeTab === 'ingredients' && (
+                    <ul>
+                        {details.extendedIngredients.map((ingredient) => (
+                            <li key={ingredient.id}>{ingredient.original}</li>
+                        ))}
+                    </ul>
+                )}
             </Info>
         </DetailWrapper>
     );
@@ -51,6 +74,9 @@ const DetailWrapper = styled.div`
     ul {
         margin-top: 2rem;
     }
+    h3 {
+        font-size: 1rem;
+    }
 `;
 
 const Button = styled.button`
@@ -63,7 +89,7 @@ const Button = styled.button`
 `
 
 const Info = styled.div`
-    margin-left: 10rem;
+    margin-left: 5rem;
 `
 
 export default Recipe;
